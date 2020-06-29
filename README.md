@@ -113,7 +113,7 @@ Practice for me to understand more of CSS.
   > - inline-block allows you to set a height/width/margins/padding on the element because it gets some properties from the block style.
   
 * What's the difference between the "nth-of-type()" and "nth-child()" selectors?
-  > - 
+  > - nth-of-type() is a little less picky than nth-child.  nth-child checks the parent that is applied to like an array and finds that particular element see how many children are under it and then finds the #th in the array.  nth-of-type() applies it to every element attached to the kind of element specified to it like p:nth-of-type will go find all paragraphs in the element that are paragraphis and that condition.
   
 * What's the difference between a relative, fixed, absolute and statically positioned element?
   > - Static element is the default position of every element. The element flows as it should on the page normally. The only reason to use static is remove the positioning set on it previously. The top, right, bottom, left and z-index properties do not apply.
