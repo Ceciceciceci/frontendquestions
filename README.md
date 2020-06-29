@@ -90,11 +90,20 @@ Practice for me to understand more of CSS.
   > - The browser checks the DOM by filtering out by specificity. It starts from the child and moves up to the parent element.  The shorter the CSS selector, the faster the browser can determine the right match and style the element.
 
 * Describe pseudo-elements and discuss what they are used for.
-
+ > - A CSS pseudo-element is a keyword added to a selector that lets you style a specific part of the selected element(s). They can be used for decoration (:first-line, :first-letter) or adding elements to the markup (combined with content: ...) without having to modify the markup (:before, :after).  There is also nth-child, and the like. 
 
 * Explain your understanding of the box model and how you would tell the browser in CSS to render your layout in different box models.
+ > -  The CSS box model is responsible for calculating:
+       - How much space a block-level element takes up.
+       - Whether or not borders and/or margins overlap, or collapse.
+       - A box’s dimensions.
+ > - calculated by width, height, padding, borders, and margins.
 
 * What does ```* { box-sizing: border-box; }``` do? What are its advantages?
+ > - By default, elements have ```* {box-sizing: content-box }``` applied, and only the content size is being accounted for.
+ > -box-sizing: border-box changes how the width and height of elements are being calculated, border and padding are also being included in the calculation.
+    > - The height of an element is now calculated by the content's height + vertical padding + vertical border width.
+    > - The width of an element is now calculated by the content's width + horizontal padding + horizontal border width.
 
 * What is the CSS `display` property and can you give a few examples of its use?
   > - CSS display property is used to hide elements from the users' view and also the DOM. Visibility keeps it in the DOM. Some examples you would use it for is when you want an element to be hidden when a form is submitted and things like animation to hide certain elements. 
@@ -102,18 +111,22 @@ Practice for me to understand more of CSS.
 * What's the difference between inline and inline-block?
   > - inline you can't do much margin styling or height and width styling to the element.  This includes elements like anchors and spans.
   > - inline-block allows you to set a height/width/margins/padding on the element because it gets some properties from the block style.
+  
 * What's the difference between the "nth-of-type()" and "nth-child()" selectors?
-
+  > - 
+  
 * What's the difference between a relative, fixed, absolute and statically positioned element?
-  > - Static element is the default position of every element. The element flows as it should on the page normally. The only reason to use static is remove the positioning set on it previously.
+  > - Static element is the default position of every element. The element flows as it should on the page normally. The only reason to use static is remove the positioning set on it previously. The top, right, bottom, left and z-index properties do not apply.
   > - Relative positioning allows you to position the element from itself. Meaning if you use top: 10px; it will move 10 px down from where it was. You can also use to this limit the scope of absolute positioned children elements inside.
   > - Absolute positioning is nice for being able to put the element you want anywhere on a page and it will be left there, but ! it is still scoped to whichever element it is relative to. so if no relative positioning is set to the parent div around it, its scope will be the entire body. The flow of the element under this positioning is removed. So any elemenst next to it, is under it. Also need to rememeber that if overused it can affect the responsiveness work that needs to be done on it.
-  > - Fixed positioning 
+  > - Fixed positioning is when the element is removed from the flow of the page and positioned at a specified position relative to the viewport and doesn't move when scrolled.
 
 * What existing CSS frameworks have you used locally, or in production? How would you change/improve them?  Bootstrap, Materialize, SASS, Animated
   > - I think they have their goods, but if it's anything I would change, I say if the dev only needs certain parts of the libraries it would be nice to be able to just grab that portion of the library than have all the components.
+  > - Bootstrap 
   
 * Have you used CSS Grid?  - Y/Y
+  > - Grid is nice for 2 dimensional layouts but I'm hoping that it will get more supported in the future as it will change how we can structure our sites and components to make it more easier to maintain.
 
 * Can you explain the difference between coding a web site to be responsive versus using a mobile-first strategy?
   > - 1.) it depends on the user base of the app/site. 
@@ -123,7 +136,8 @@ Practice for me to understand more of CSS.
 * Have you ever worked with retina graphics? If so, when and what techniques did you use? -no
 
 * Is there any reason you'd want to use `translate()` instead of *absolute positioning*, or vice-versa? And why?
-  > If you don't need to fix the flow of one element somewhere in the parent context it is in, don't use absolute positioning. 
+  > translate() is a value of CSS transform. Changing transform or opacity does not trigger browser reflow or repaint, only compositions, whereas changing the absolute positioning triggers reflow. transform causes the browser to create a GPU layer for the element but changing absolute positioning properties uses the CPU. Hence translate() is more efficient and will result in shorter paint times for smoother animations.
+When using translate(), the element still takes up its original space (sort of like position: relative), unlike in changing the absolute positioning.
 
 * How is clearfix css property useful?
   -  move elements under without using br/ for example a div you want to clear left and right of it. 
