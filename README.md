@@ -14,38 +14,56 @@ Practice for me to understand more of CSS.
   > - For example a reset oh h1 tag would remove all the styling on it originally on the browser and a normalize will build upon already css and making it do what it needs to do across diff browsers.
   
 * Describe Floats and how they work.
-  > - When you float an element, what you do is you remove that specific element from natural element flow, but inline elements still respect its boundaries, where block element does not, so thats why <p> element or <div> (both block elements )will collapse, because they don't 'sense' anything is there. Float left will move the element to the left and all inline elements are to the left.  If you use clear on inline, you can move it under the float element. when you check the boundary spacing after the float element, it's been elimated.
+  > - When you float an element, what it does is it changes the flow of the elemts around it. While inline elements still respect its boundaries, the block element does not, so thats why <p> element or <div> (both block elements )will collapse, because they don't 'sense' anything is there. Float left will move the element to the left and all inline elements are to the left.  If you use clear on inline, you can move it under the float element. when you check the boundary spacing after the float element, it's been elimated.
+  > - The CSS clear property can be used to be positioned below left/right/both floated elements.
+  > - 
  
 * Describe z-index and how stacking context is formed.
-  > - z-index is a layering component.  The stacking is formed like layers in photoshop. where the first or previous layer is the in the back and stacked on top of each other like an imaginary z-axis relative to the user.  The layers are also based depended on the position as well. They may be affected by other properties on how they stack.
+  > - z-index is a layering component.  The stacking is formed like layers where the first or previous layer is the in the back and stacked on top of each other like an imaginary z-axis relative to the user.  The layers are also based depended on the position/parent/child as well. They may be affected by other properties on how they stack.
+  > - For example, If an element B sits on top of element A, a child element of element A, element C, can never be higher than element B even if element C has a higher z-index than element B.
  
 * Describe BFC (Block Formatting Context) and how it works.
   > - The Block Formatting Context is a term to describe how an element lays out things in its own block. The outermost element in a document that uses block layout rules establishes the first, or initial block formatting context. This means that every element inside the <html> element's block is laid out according to normal flow following the rules for block and inline layout.  It determines as well the padding, margins, and borders of the elements inside of how they will react to each other in the layout. This can be observed with the CSS box properties. border-box, etc.
  
 * What are the various clearing techniques and which is appropriate for what context?
+ > - The .clearfix hack uses a clever CSS pseudo selector (:after) to clear floats. Rather than setting the overflow on the parent, you apply an additional class like clearfix to it. Then apply this CSS:
+         ```.clearfix:after {
+            content: '.';
+            visibility: hidden;
+            display: block;
+            height: 0;
+            clear: both;
+          }```
+ > - overflow clears : auto or hidden method - Parent will establish a new block formatting context and expand to contains its floated children. Alternatively, give overflow: auto or overflow: hidden property to the parent element which will establish a new block formatting context inside the children and it will expand to contain its children.
 
 * How would you approach fixing browser-specific styling issues?
-  media queries, dev tools on inspect console and testing in the console before fixing the code, reduces refresh time. 
+  > - media queries, dev tools on inspect console and testing in the console before fixing the code, reduces refresh time. 
   
 * How do you serve your pages for feature-constrained browsers?
   * What techniques/processes do you use?
-  
+  > - One technique is after identifying the issue and the offending browser, use a separate style sheet that only loads when that specific browser is being used. This technique requires server-side rendering though.
+  > - You can also use CSS libraries that exist like Bootstrap that has uniformally tested to work between multiple browsers.
+  > - there are also prefixes that can be used to this as well like -webkit-transition - o , -moz, -ms, 
+  > - Use caniuse.com to check for feature support.
+  > - Progressive enhancement — The practice of building an application for a base level of user experience, but adding functional enhancements when a browser supports it.
   
 * What are the different ways to visually hide content (and make it available only for screen readers)?
   > 1.) Use alt for images, use aria-labels for divs and other non-img containers.  
   > 2.) Positioning and fixing height and width to 1px and setting overflow to hidden to make it gone with people with sight but not invisible to screen readers.
+  > 3.) text-indent: -9999px. This only works on text within the block elements.
   
 * Have you ever used a grid system, and if so, what do you prefer?
   > I have used three, Bootstraps grid system, CSS flexbox, and CSS grids.  I prefer CSS grids, however, it is not fully supported yet on Intervnet Explorer so CSS flexbox is a good fall back. Bootstrap is good but only in cases where it's needed quickly but a danger if the library would one day get depreciated or need to be moved to a new version.
+  > I do know of the float grid system, it does have the most support at the moment even with older browsers.
   
 * Have you used or implemented media queries or mobile specific layouts/CSS?
   > Yes 680/768 px is common pixel count for starting mobile related layout. 420px as well.
 
 * Are you familiar with styling SVG?
-  > - Mainly with fills and strokes and outline animation. 
+  > - Mainly with fills and strokes
   
 * Can you give an example of an `@media` property other than `screen`?
-  > - there is just the min-width, max-width, print(for printing). 
+  > - there is just the min-width, max-width, print(for printing). With print you need to add page-breaks
   
 * What are some of the "gotchas" for writing efficient CSS?
   > 1.) Don't use the official css tag selectors when making new names.
@@ -56,10 +74,16 @@ Practice for me to understand more of CSS.
   
 * What are the advantages/disadvantages of using CSS preprocessors?
   * Describe what you like and dislike about the CSS preprocessors you have used.
-  > - advantages: It's good to compile a whole bunch of CSS files into one to only serve one css file. Keeps the rest of the CSS code nice and clean and modularized.
-  > - disadvantages: you have to make sure after compiling that not all the css files contain certain codes that are repeated through out multiple css files. keep it clean and categorize by selector.
+  > - advantages: It's good to compile a whole bunch of CSS files into one to only serve one css file. Keeps the rest of the CSS code nice and clean and modularized. 
+    - Easy to write nested selectors.
+    - Variables for consistent theming. Can share theme files across different projects.
+    - Mixins to generate repeated CSS.
+    - Splitting your code into multiple files. CSS files can be split up too but doing so will require a HTTP request to download each CSS file.
+
+  > - disadvantages: you have to make sure after compiling that not all the css files contain certain codes that are repeated through out multiple css files. You might also spend more time recompiling.
 
 * How would you implement a web design comp that uses non-standard fonts?
+  > - Can use @font-face css keyword  OR
   > - import otfs on the mac. or grab the woff files and put that in the project. That way the resource is there when needed than depending on a font file cdn to do it like google fonts. Never know when the link might change or get updated. But I would also ask the person who designed the comp to choose a secondary font that is available on most browsers to add on to the font family if shall the font files cannot be grabbed or served somehow.
   
 * Explain how a browser determines what elements match a CSS selector.
